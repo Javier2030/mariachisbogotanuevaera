@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /fb-lp/
+Disallow: /api/
+
+Sitemap: https://mariachisbogotanuevaera.com/sitemap.xml
