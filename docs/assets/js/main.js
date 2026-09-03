@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  var WA = 'PENDIENTE_WHATSAPP';
+  var WA = '573214014431';
 
   /* --- Menú móvil --- */
   var burger = document.getElementById('burger');
@@ -90,7 +90,7 @@
   if (form) {
     var phoneField = document.getElementById('q-phone');
 
-    // Formato visual del celular colombiano: PENDIENTE
+    // Formato visual del celular colombiano (3 3 4)
     if (phoneField) {
       phoneField.addEventListener('input', function () {
         var d = this.value.replace(/\D/g, '').slice(0, 10);
