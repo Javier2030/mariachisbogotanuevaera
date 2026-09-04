@@ -747,7 +747,11 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
 .arte-paq .gal-btn{display:block;width:100%;padding:0;border:0;background:#08160f;cursor:zoom-in;
   aspect-ratio:auto;border-radius:0;box-shadow:none;transform:none}
 .arte-paq .gal-btn:hover{transform:none;box-shadow:none;border-color:transparent}
-.arte-paq .gal-btn img{display:block;width:100%;height:auto;object-fit:contain;background:#08160f;transform:none}
+.arte-paq .gal-btn{background:#050505}
+/* Todas las piezas comparten proporción para que los cinco pies queden a la misma altura.
+   `contain` sobre negro: el arte nunca se recorta y las franjas se funden con su propio marco. */
+.arte-paq .gal-btn img{display:block;width:100%;height:auto;aspect-ratio:1/1.33;object-fit:contain;
+  background:#050505;transform:none}
 .arte-paq .gal-btn:hover img{transform:none}
 .arte-paq .gal-btn:focus-visible{outline:2px solid var(--oro);outline-offset:-3px}
 /* El distintivo va DENTRO del pie, nunca encima del arte: taparlo era estropear el diseño. */
