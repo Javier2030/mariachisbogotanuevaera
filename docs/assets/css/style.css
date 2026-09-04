@@ -824,8 +824,12 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
 }
 
 /* 3 · El navegador no pinta lo que aún no se ve: menos trabajo en cada scroll. */
-.section { content-visibility: auto; contain-intrinsic-size: auto 620px; }
-.hero, .hdr { content-visibility: visible; }
+/* 4-sep-2026: se RETIRA `content-visibility:auto`. Ahorraba un poco de trabajo al pintar,
+   pero al desplazarse rápido el navegador muestra estados intermedios mal maquetados —el
+   dueño fotografió dos: una tarjeta corrida a la izquierda y la tabla de adicionales partida
+   junto al arte—. Ninguno se reprodujo en pruebas a 360, 390, 412, 430, 540, 600, 768 y 820 px,
+   porque no es un defecto de la maqueta sino del pintado diferido. La velocidad ya está
+   resuelta por otras vías (pixel, tamaño de imágenes y animaciones nativas). */
 
 /* 4 · Tipografía que se acomoda sola: titulares sin una palabra huérfana. */
 h1, h2, h3, .lead { text-wrap: balance; }
