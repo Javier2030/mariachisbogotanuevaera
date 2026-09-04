@@ -877,3 +877,33 @@ p { text-wrap: pretty; }
 .brand small{font-size:.6rem;letter-spacing:.2em;margin-top:3px}
 @media(max-width:560px){.brand{font-size:1.06rem;letter-spacing:.045em}}
 .ftr .brand{font-size:1.5rem}
+
+/* ═══ RÓTULO DEL GRUPO — 4-sep-2026 ═══
+   El nombre a tamaño de cartel, ocupando el aire que quedaba bajo el encabezado.
+   Tipografía fluida (crece con el ancho, no por saltos), interlineado apretado y
+   «Nueva Era» en degradado de oro: es la marca, y debe leerse desde lejos. */
+.wordmark{
+  margin:0 0 18px;font-family:var(--ff-head);font-weight:900;text-transform:uppercase;
+  line-height:.86;letter-spacing:-.015em;display:flex;flex-direction:column;
+  font-size:clamp(2.9rem,13.5vw,7.2rem);
+}
+.wordmark .wm-1{color:#fbf8ee;text-shadow:0 2px 34px rgba(0,0,0,.45)}
+.wordmark .wm-2{
+  background:linear-gradient(180deg,#f6dc9a 0%,var(--oro) 52%,#a97c1c 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:.005em;
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .wordmark .wm-2{color:var(--oro);background:none}
+}
+/* Sobre fondo claro (la portada tiene el hero oscuro, pero otras páginas no) */
+.hero:not(.hero-oscuro) .wordmark .wm-1{color:#fbf8ee}
+@media(min-width:961px){
+  .wordmark{font-size:clamp(4.2rem,7.2vw,7.2rem);margin-bottom:22px}
+  .hero-con-foto .wordmark{font-size:clamp(3.6rem,6vw,6rem)}
+}
+@media(prefers-reduced-motion:no-preference){
+  .wordmark .wm-1,.wordmark .wm-2{animation:wmEntra .7s cubic-bezier(.22,1,.36,1) both}
+  .wordmark .wm-2{animation-delay:.09s}
+  @keyframes wmEntra{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
