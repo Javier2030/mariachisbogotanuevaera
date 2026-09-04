@@ -848,3 +848,32 @@ p { text-wrap: pretty; }
 /* 7 · Roce de los botones: respuesta inmediata, sin recalcular diseño. */
 .btn{will-change:transform}
 .btn:active{transform:translateY(1px) scale(.985)}
+
+/* ═══ 4-sep-2026 (noche) — LEGIBILIDAD, por pedido del dueño ═══
+   La letra de los artes vive dentro de la imagen y no se puede agrandar: en una tarjeta de
+   290 px es ilegible. La solución honesta es doble: piezas más grandes (3 columnas en vez
+   de 5) y el contenido del paquete escrito DEBAJO en texto de verdad, a tamaño de lectura. */
+.artes-paq{grid-template-columns:repeat(3,1fr);gap:26px;width:min(1180px,94vw)}
+@media(min-width:1500px){.artes-paq{grid-template-columns:repeat(3,1fr);width:min(1320px,92vw)}}
+.arte-paq figcaption{padding:20px 20px 22px;font-size:1.02rem;gap:10px;align-items:center}
+.arte-nombre{font-family:var(--ff-head);font-size:1.72rem;line-height:1.1;color:#fbf8ee}
+.arte-precio{font-size:1.9rem;font-weight:800;color:var(--oro);letter-spacing:-.01em;line-height:1}
+.arte-nota{font-size:.95rem;color:#d8d2be;font-weight:600}
+.arte-lista{list-style:none;margin:6px 0 4px;padding:0;width:100%;display:grid;gap:7px;text-align:left}
+.arte-lista li{position:relative;padding-left:24px;font-size:1.02rem;line-height:1.42;
+  color:#eae5d4;font-weight:500}
+.arte-lista li::before{content:"";position:absolute;left:4px;top:.58em;width:9px;height:9px;
+  border-radius:50%;background:linear-gradient(140deg,var(--oro),#a97c1c);box-shadow:0 0 0 3px rgba(201,150,43,.16)}
+.arte-paq .btn{margin-top:6px;font-size:1.02rem;padding:13px 20px}
+@media(max-width:1100px){.artes-paq{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.artes-paq{grid-template-columns:1fr;width:min(520px,94vw);gap:22px}
+  .arte-paq figcaption{font-size:1.02rem;padding:18px 18px 20px}
+  .arte-paq figcaption b.arte-nombre{font-size:1.6rem}
+  .arte-precio{font-size:1.8rem}
+  .arte-lista li{font-size:1.02rem}}
+
+/* El nombre del grupo, grande y en mayúsculas. */
+.brand{font-size:1.26rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.06}
+.brand small{font-size:.6rem;letter-spacing:.2em;margin-top:3px}
+@media(max-width:560px){.brand{font-size:1.06rem;letter-spacing:.045em}}
+.ftr .brand{font-size:1.5rem}
