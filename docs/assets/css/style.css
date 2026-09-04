@@ -965,6 +965,17 @@ p { text-wrap: pretty; }
   /* El menú desplegable cuelga del alto real del encabezado, no de un 68 px fijo. */
   .nav{inset:var(--hdr-h) 0 auto}
   .burger{margin-left:0}
+  /* Se reserva el mismo aire a lado y lado para que el nombre quede ópticamente
+     centrado y nunca toque el botón del menú, que va suelto a la derecha. */
+  .hdr .wrap{padding-inline:52px}
+  .brand{font-size:clamp(1.16rem,4.9vw,1.55rem);letter-spacing:.06em;gap:10px}
+  .brand .star{width:26px;height:26px}
+  .brand small{letter-spacing:.24em;gap:8px}
+  .brand small::before,.brand small::after{width:16px}
+}
+@media(max-width:360px){
+  .brand{font-size:1.02rem;letter-spacing:.04em}
+  .hdr .wrap{padding-inline:46px}
 }
 /* El ancla de paquetes se ajusta al encabezado nuevo. */
 #paquetes{scroll-margin-top:calc(var(--hdr-h) + 12px)}
