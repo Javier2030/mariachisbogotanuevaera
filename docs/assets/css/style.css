@@ -733,59 +733,6 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
   .svc .card p{font-size:.88rem}
 }
 
-/* ═══ PAQUETES: los artes del grupo son el ÚNICO formato (4-sep-2026) ═══
-   Antes convivían una tabla y unas tarjetas para lo mismo. El dueño entregó sus
-   piezas de diseño y son las que mandan. Rompen el ancho del .wrap para verse grandes. */
-.artes-paq{display:grid;gap:22px;margin-top:40px}
-.arte-paq{position:relative;margin:0;border-radius:18px;overflow:hidden;background:#08160f;
-  border:1px solid rgba(201,150,43,.34);box-shadow:0 22px 52px -26px rgba(8,22,15,.62);
-  display:flex;flex-direction:column;
-  transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),border-color .3s}
-.arte-paq:hover{transform:translateY(-6px);box-shadow:0 32px 70px -28px rgba(8,22,15,.75);border-color:var(--oro)}
-.arte-paq.promo{border-color:var(--oro);box-shadow:0 22px 52px -22px rgba(201,150,43,.5)}
-.arte-paq .gal-btn{display:block;width:100%;padding:0;border:0;background:#08160f;cursor:zoom-in;
-  aspect-ratio:auto;border-radius:0;box-shadow:none;transform:none}
-.arte-paq .gal-btn:hover{transform:none;box-shadow:none;border-color:transparent}
-.arte-paq .gal-btn{background:#050505}
-/* Todas las piezas comparten proporción para que los cinco pies queden a la misma altura.
-   `contain` sobre negro: el arte nunca se recorta y las franjas se funden con su propio marco. */
-.arte-paq .gal-btn img{display:block;width:100%;height:auto;aspect-ratio:1/1.33;object-fit:contain;
-  background:#050505;transform:none}
-.arte-paq .gal-btn:hover img{transform:none}
-.arte-paq .gal-btn:focus-visible{outline:2px solid var(--oro);outline-offset:-3px}
-/* El distintivo va DENTRO del pie, nunca encima del arte: taparlo era estropear el diseño. */
-.arte-tag{align-self:center;background:linear-gradient(135deg,var(--oro),#a97c1c);color:#fff;
-  font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
-  padding:4px 12px;border-radius:999px;box-shadow:0 6px 18px -8px rgba(0,0,0,.7)}
-.arte-paq figcaption{padding:14px 13px 16px;color:#efe9d6;font-size:.94rem;font-weight:600;
-  text-align:center;background:linear-gradient(180deg,#0d2418,#08160f);
-  border-top:1px solid rgba(201,150,43,.28);margin-top:auto;display:flex;flex-direction:column;gap:11px}
-.arte-paq figcaption b{color:#fbf8ee;font-size:1.05rem}
-.arte-precio{color:var(--oro);font-weight:800}
-.arte-nota{display:block;font-size:.8rem;color:#c9c4b2;font-weight:500}
-.arte-paq .btn{width:100%;justify-content:center}
-/* En móvil se abandona el truco de ancho completo (margin-left:50% + translate): dentro de
-   contenedores con animación se desplazaba y sacaba barra horizontal. Aquí basta el ancho normal. */
-@media(max-width:760px){
-  .arte-paq figcaption{font-size:.85rem;padding:11px 9px 13px;gap:9px}
-  .arte-paq figcaption b{font-size:.95rem}}
-
-/* el ancla de paquetes no queda debajo del encabezado fijo */
-#paquetes{scroll-margin-top:86px}
-
-/* En móvil la FOTO del grupo va primero: se ve el mariachi sin tener que bajar. */
-@media(max-width:900px){
-  .hero-grid > div:first-child{display:flex;flex-direction:column}
-  .hero-grid .hero-top{order:1}
-  .hero-grid .hero-foto{order:2;margin-top:14px;margin-bottom:16px}
-  .hero-grid h1{order:3}
-  .hero-grid .lead{order:4}
-  .hero-grid .hero-cta{order:5;margin-top:20px}
-  .hero-grid .hero-trust{order:6;margin-top:16px}
-  .hero h1{font-size:clamp(1.9rem,7.4vw,2.5rem)}
-  .hero-foto img{max-height:none}
-}
-
 /* ═══════════════════════════════════════════════════════════════════════════
    CAPA 2026-2027 — 4-sep-2026
    Tres decisiones, todas nativas del navegador y sin una línea de JavaScript:
@@ -805,7 +752,7 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
    Donde el navegador soporte `animation-timeline`, se apaga el observador de JS
    (main.js quita la clase `pre`) y el efecto lo lleva el scroll directamente. */
 @supports (animation-timeline: view()) {
-  .reveal > *, .gal-item, .arte-paq {
+  .reveal > *, .gal-item, .paq {
     animation: aparecer linear both;
     animation-timeline: view();
     /* El rango termina dentro de `entry`: así cualquier elemento que asome queda
@@ -816,7 +763,7 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
   @keyframes aparecer { from { opacity:0; transform: translateY(18px) } to { opacity:1; transform:none } }
 }
 @media (prefers-reduced-motion: reduce) {
-  @supports (animation-timeline: view()) { .reveal > *, .gal-item, .arte-paq { animation: none } }
+  @supports (animation-timeline: view()) { .reveal > *, .gal-item, .paq { animation: none } }
 }
 
 /* 3 · El navegador no pinta lo que aún no se ve: menos trabajo en cada scroll. */
@@ -849,31 +796,6 @@ p { text-wrap: pretty; }
 .btn{will-change:transform}
 .btn:active{transform:translateY(1px) scale(.985)}
 
-/* ═══ 4-sep-2026 (noche) — LEGIBILIDAD, por pedido del dueño ═══
-   La letra de los artes vive dentro de la imagen y no se puede agrandar: en una tarjeta de
-   290 px es ilegible. La solución honesta es doble: piezas más grandes (3 columnas en vez
-   de 5) y el contenido del paquete escrito DEBAJO en texto de verdad, a tamaño de lectura. */
-.arte-paq figcaption{padding:20px 20px 22px;font-size:1.02rem;gap:10px;align-items:center}
-.arte-nombre{font-family:var(--ff-head);font-size:1.72rem;line-height:1.1;color:#fbf8ee}
-.arte-precio{font-size:1.9rem;font-weight:800;color:var(--oro);letter-spacing:-.01em;line-height:1}
-.arte-nota{font-size:.95rem;color:#d8d2be;font-weight:600}
-.arte-lista{list-style:none;margin:6px 0 4px;padding:0;width:100%;display:grid;gap:7px;text-align:left}
-.arte-lista li{position:relative;padding-left:24px;font-size:1.02rem;line-height:1.42;
-  color:#eae5d4;font-weight:500}
-.arte-lista li::before{content:"";position:absolute;left:4px;top:.58em;width:9px;height:9px;
-  border-radius:50%;background:linear-gradient(140deg,var(--oro),#a97c1c);box-shadow:0 0 0 3px rgba(201,150,43,.16)}
-.arte-paq .btn{margin-top:6px;font-size:1.02rem;padding:13px 20px}
-@media(max-width:720px){
-  .arte-paq figcaption{font-size:1.02rem;padding:18px 18px 20px}
-  .arte-paq figcaption b.arte-nombre{font-size:1.6rem}
-  .arte-precio{font-size:1.8rem}
-  .arte-lista li{font-size:1.02rem}}
-
-/* El nombre del grupo, grande y en mayúsculas. */
-.brand{font-size:1.26rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.06}
-.brand small{font-size:.6rem;letter-spacing:.2em;margin-top:3px}
-@media(max-width:560px){.brand{font-size:1.06rem;letter-spacing:.045em}}
-.ftr .brand{font-size:1.5rem}
 
 /* ═══ RÓTULO DEL GRUPO — 4-sep-2026 (v2) ═══
    Las dos líneas miden EXACTAMENTE lo mismo. No hay forma honesta de lograrlo con texto
@@ -1056,60 +978,125 @@ p { text-wrap: pretty; }
   .hero-grid .hero-trust{order:6}
 }
 
-/* ═══ PAQUETES EN FILA: el arte a un lado y el detalle al otro — 4-sep-2026 ═══
-   Prueba pedida por el dueño. Cada paquete ocupa una fila completa: la pieza a la
-   izquierda y lo que incluye a la derecha, para poder leer las dos cosas de un vistazo. */
-/* ANCHO — fuente única. En móvil `width:auto` para que respete el relleno del contenedor:
-   con `94vw`/`96vw` la tarjeta salía 28 px más ancha que su caja, quedaba descentrada y el
-   borde derecho lo recortaba `overflow-x:hidden`. */
-.artes-paq{grid-template-columns:1fr;width:auto;gap:20px;margin-inline:auto;max-width:1080px}
-.arte-paq{flex-direction:row;align-items:stretch}
-/* El arte se alinea ARRIBA: centrado dejaba una franja negra vacía encima cuando el
-   texto es más alto que la pieza. */
-.arte-paq .gal-btn{flex:0 0 46%;max-width:46%;display:flex;align-items:flex-start;background:#050505}
-.arte-paq .gal-btn picture{display:block;width:100%}
-.arte-paq .gal-btn img{aspect-ratio:auto;height:auto;width:100%}
-.arte-paq figcaption{flex:1 1 auto;justify-content:center;text-align:center;padding:18px 16px}
-.arte-paq figcaption b.arte-nombre{font-size:1.5rem}
-.arte-precio{font-size:1.7rem}
-.arte-lista{gap:6px}
-.arte-lista li{font-size:.97rem;padding-left:21px;line-height:1.38}
-.arte-lista li::before{width:8px;height:8px;left:3px}
-@media(min-width:721px){
-  .arte-paq .gal-btn{flex:0 0 38%;max-width:38%}
-  .arte-paq figcaption{padding:26px 30px}
-  .arte-paq figcaption b.arte-nombre{font-size:1.85rem}
-  .arte-precio{font-size:2.1rem}
-  .arte-lista{grid-template-columns:1fr 1fr;gap:8px 22px}
-  .arte-lista li{font-size:1.02rem}
-  .arte-paq .btn{max-width:340px;margin-inline:auto}
-}
-@media(min-width:1280px){ .artes-paq{max-width:1180px} }
-@media(max-width:430px){
-  .arte-paq .gal-btn{flex:0 0 44%;max-width:44%}
-  .arte-paq figcaption{padding:14px 11px}
-  .arte-paq figcaption b.arte-nombre{font-size:1.24rem}
-  .arte-precio{font-size:1.42rem}
-  .arte-nota{font-size:.84rem}
-  .arte-lista li{font-size:.9rem;padding-left:18px}
-  .arte-paq .btn{font-size:.92rem;padding:11px 14px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BARROCO DORADO — el lenguaje de las piezas del grupo, ahora en todo el sitio.
+   4-sep-2026, orden del dueño: «que sea el estilo que domine».
+   Todo con código: filigrana, esquinas y letra metálica salen de CSS y de un
+   par de SVG en línea. Ni una imagen, así que se lee a cualquier tamaño, Google
+   lo indexa y la página adelgaza medio megabyte.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --oro-cl:#f6dc9a; --oro-md:#c9962b; --oro-os:#8a6516;
+  --noche:#0a0d0b; --noche-2:#12160f;
 }
 
-/* ═══ EL HUECO NEGRO SE LLENA CON EL PROPIO ARTE — 4-sep-2026 ═══
-   Cuando el detalle es más alto que la pieza sobraba negro. En vez de estirar el arte
-   (lo deformaría) o recortarlo (a este ancho habría que cortarle el 60 %), se pone la
-   misma pieza de fondo, ampliada y desenfocada. El arte se ve completo y nítido encima,
-   y la columna queda llena con sus propios colores. */
-.arte-paq .gal-btn{position:relative;align-items:center;overflow:hidden}
-.arte-paq .gal-btn::before{
-  content:"";position:absolute;inset:-8%;z-index:0;
-  background-image:var(--arte);background-size:cover;background-position:center;
-  filter:blur(26px) saturate(1.45) brightness(.95);
-  transform:scale(1.28);
+/* Letra metálica: el mismo recurso del rótulo, reutilizable en cualquier título. */
+.metal{
+  background:linear-gradient(180deg,var(--oro-cl) 0%,var(--oro-md) 52%,var(--oro-os) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.arte-paq .gal-btn::after{
-  content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(180deg,rgba(5,5,5,.06),rgba(5,5,5,.22));
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){ .metal{color:var(--oro-md);background:none} }
+
+/* Filigrana divisoria. Un solo SVG, sin peticiones al servidor. */
+.orn{height:22px;margin:12px auto 14px;width:100%;max-width:230px;
+  background:center/contain no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 22' fill='none' stroke='%23c9962b' stroke-width='1.5'%3E%3Cpath d='M4 11h78' opacity='.75'/%3E%3Cpath d='M158 11h78' opacity='.75'/%3E%3Cpath d='M96 11c8-9 16-9 24 0-8 9-16 9-24 0z'/%3E%3Cpath d='M144 11c-8-9-16-9-24 0 8 9 16 9 24 0z'/%3E%3Ccircle cx='120' cy='11' r='2.6' fill='%23c9962b' stroke='none'/%3E%3C/svg%3E")}
+
+/* ── LAS TARJETAS DE PAQUETE ────────────────────────────────────────────── */
+.paqs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:38px;
+  margin-inline:auto;max-width:1180px}
+.paq{position:relative;margin:0;border-radius:20px;
+  background:
+    radial-gradient(120% 78% at 50% -12%, rgba(201,150,43,.20), transparent 62%),
+    linear-gradient(168deg,#121611 0%,var(--noche) 62%,#080b09 100%);
+  border:1px solid rgba(201,150,43,.42);
+  box-shadow:0 26px 60px -30px rgba(0,0,0,.85), inset 0 0 0 1px rgba(255,255,255,.03);
+  transition:transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s;
 }
-.arte-paq .gal-btn picture{position:relative;z-index:2;
-  box-shadow:0 18px 44px -18px rgba(0,0,0,.9)}
+.paq:hover{transform:translateY(-7px);border-color:var(--oro-md);
+  box-shadow:0 36px 78px -32px rgba(0,0,0,.9), 0 0 0 1px rgba(201,150,43,.4)}
+.paq-alto{border-color:rgba(201,150,43,.62)}
+.paq-promo{border-color:var(--oro-md);box-shadow:0 26px 60px -26px rgba(201,150,43,.42)}
+
+/* El marco interior de hilo de oro y las cuatro esquinas, con puro borde. */
+.paq-marco{position:relative;padding:34px 24px 28px;text-align:center;
+  border:1px solid rgba(201,150,43,.28);border-radius:14px;margin:11px}
+.paq-marco::before,.paq-marco::after,.paq::before,.paq::after{
+  content:"";position:absolute;width:22px;height:22px;border:2px solid var(--oro-md);pointer-events:none}
+.paq-marco::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
+.paq-marco::after{top:-1px;right:-1px;border-left:0;border-bottom:0;border-radius:0 12px 0 0}
+.paq::before{bottom:10px;left:10px;border-right:0;border-top:0;border-radius:0 0 0 12px}
+.paq::after{bottom:10px;right:10px;border-left:0;border-top:0;border-radius:0 0 12px 0}
+
+.paq-cinta{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--oro-cl),var(--oro-md) 55%,var(--oro-os));
+  color:#1a1305;font-size:.68rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 16px;border-radius:999px;white-space:nowrap;
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.8)}
+.paq-eyebrow{margin:0;font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(246,220,154,.62);font-weight:700}
+.paq-nombre{font-family:var(--ff-head);font-size:clamp(2rem,4.6vw,2.5rem);line-height:1.04;
+  margin:.18em 0 0;text-transform:uppercase;letter-spacing:.02em;
+  background:linear-gradient(180deg,var(--oro-cl) 0%,var(--oro-md) 54%,var(--oro-os) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 18px rgba(201,150,43,.22)}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){ .paq-nombre{color:var(--oro-cl);background:none} }
+.paq-precio{margin:0;font-family:var(--ff-head);font-weight:900;color:#fdfaf2;
+  font-size:clamp(2.5rem,6vw,3.1rem);line-height:1;letter-spacing:-.02em}
+.paq-precio .sig{font-size:.56em;vertical-align:.34em;color:var(--oro-cl);margin-right:.06em}
+.paq-precio .cop{display:block;font-family:var(--ff-body);font-size:.7rem;font-weight:700;
+  letter-spacing:.3em;color:rgba(246,220,154,.6);margin-top:8px}
+.paq-nota{margin:12px 0 0;font-size:.94rem;color:#cfc9b6}
+.paq-nota b{color:var(--oro-cl)}
+.paq-lista{list-style:none;margin:20px 0 24px;padding:0;display:grid;gap:11px;text-align:left}
+.paq-lista li{position:relative;padding-left:28px;font-size:1.01rem;line-height:1.42;color:#ece7d8}
+.paq-lista li::before{content:"";position:absolute;left:2px;top:.44em;width:13px;height:13px;
+  background:center/contain no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 0l1.5 4.5L12 6 7.5 7.5 6 12 4.5 7.5 0 6l4.5-1.5z' fill='%23c9962b'/%3E%3C/svg%3E")}
+
+.btn-oro{display:flex;align-items:center;justify-content:center;width:100%;
+  padding:14px 20px;border-radius:999px;font-weight:800;font-size:1rem;letter-spacing:.02em;
+  color:#1a1305;text-decoration:none;border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(135deg,var(--oro-cl) 0%,var(--oro-md) 52%,#a97c1c 100%);
+  box-shadow:0 14px 30px -14px rgba(201,150,43,.75);transition:var(--t)}
+.btn-oro:hover{filter:brightness(1.08);transform:translateY(-2px);text-decoration:none;
+  box-shadow:0 20px 40px -16px rgba(201,150,43,.85)}
+.btn-oro:active{transform:translateY(0)}
+
+@media(max-width:1100px){ .paqs{grid-template-columns:repeat(2,1fr);gap:20px} }
+@media(max-width:720px){
+  .paqs{grid-template-columns:1fr;gap:22px;max-width:520px}
+  .paq-marco{padding:30px 18px 24px;margin:9px}
+  .paq-lista li{font-size:1rem}
+}
+
+/* ── SERVICIOS ADICIONALES, mismo lenguaje ──────────────────────────────── */
+.adic{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:26px 0 0;
+  max-width:840px;margin-inline:auto}
+.adic-it{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:15px 20px;border-radius:14px;
+  background:linear-gradient(168deg,#121611,var(--noche));
+  border:1px solid rgba(201,150,43,.3);color:#ece7d8;font-size:1rem}
+.adic-it b{font-family:var(--ff-head);font-size:1.22rem;white-space:nowrap;
+  background:linear-gradient(180deg,var(--oro-cl),var(--oro-md) 60%,var(--oro-os));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){ .adic-it b{color:var(--oro-cl);background:none} }
+@media(max-width:620px){ .adic{grid-template-columns:1fr} }
+
+/* ── LA SECCIÓN QUE LOS CONTIENE: noche con brillo de oro ───────────────── */
+#paquetes-zona{
+  background:
+    radial-gradient(900px 420px at 50% -8%, rgba(201,150,43,.14), transparent 60%),
+    linear-gradient(180deg,#0d110c 0%,var(--noche) 55%,#0b0f0c 100%);
+  border-block:1px solid rgba(201,150,43,.34);color:#ece7d8}
+#paquetes-zona h2,#paquetes-zona h3{color:#fbf6e8}
+#paquetes-zona .prose p,#paquetes-zona .lead,#paquetes-zona .muted{color:#cfc9b6}
+#paquetes-zona .prose b{color:var(--oro-cl)}
+#paquetes-zona .eyebrow{color:var(--oro-cl);border-color:rgba(201,150,43,.4)}
+
+/* ── EL RESTO DEL SITIO recibe el mismo acento ──────────────────────────── */
+.section .cab h2::after,.section .center h2::after{content:"";display:block;height:20px;
+  margin:14px auto 0;max-width:210px;
+  background:center/contain no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 22' fill='none' stroke='%23c9962b' stroke-width='1.5'%3E%3Cpath d='M4 11h78' opacity='.75'/%3E%3Cpath d='M158 11h78' opacity='.75'/%3E%3Cpath d='M96 11c8-9 16-9 24 0-8 9-16 9-24 0z'/%3E%3Cpath d='M144 11c-8-9-16-9-24 0 8 9 16 9 24 0z'/%3E%3Ccircle cx='120' cy='11' r='2.6' fill='%23c9962b' stroke='none'/%3E%3C/svg%3E")}
+.gal-btn{border-color:rgba(201,150,43,.4)}
+.faq details{border-color:rgba(201,150,43,.28)}
