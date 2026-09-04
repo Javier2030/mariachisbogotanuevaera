@@ -988,3 +988,73 @@ p { text-wrap: pretty; }
   .hero-con-foto .hero-split{grid-template-columns:.94fr 1.06fr}
   .hero-con-foto .hero-foto img{max-height:none}
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   1) LA FRANJA DE ARRIBA: más baja y azul — 4-sep-2026, orden del dueño.
+   Azul profundo con el nombre en crema y la ciudad en oro. Es el mismo
+   azul del rótulo, en su versión oscura, para que el sitio sea uno solo.
+   ═══════════════════════════════════════════════════════════════════ */
+:root{ --azul: #10314f; --azul-2: #0b2440; --hdr-h: 74px; }
+
+.hdr{
+  background:linear-gradient(180deg,var(--azul) 0%,var(--azul-2) 100%);
+  border-bottom:1px solid rgba(201,150,43,.42);
+}
+.hdr.scrolled{background:linear-gradient(180deg,var(--azul) 0%,var(--azul-2) 100%);
+  box-shadow:0 10px 30px -18px rgba(4,18,32,.85)}
+@supports (backdrop-filter: blur(12px)){
+  .hdr{background:color-mix(in srgb, var(--azul) 88%, transparent);backdrop-filter:blur(14px) saturate(1.25)}
+}
+.hdr .wrap{min-height:var(--hdr-h);gap:5px;padding-block:9px}
+.hdr .brand span,.hdr .brand{color:#f3f7fb}
+.hdr .brand small{color:var(--oro)}
+.hdr .brand small::before{background:linear-gradient(90deg,transparent,var(--oro))}
+.hdr .brand small::after{background:linear-gradient(90deg,var(--oro),transparent)}
+.burger span{background:#f3f7fb}
+.hdr .nav a:not(.btn){color:#d7e4ef}
+.hdr .nav a:not(.btn):hover{color:var(--oro)}
+
+/* Más baja: el nombre baja de tamaño y la estrella se ajusta. */
+.hdr .brand{font-size:clamp(1.06rem,4.4vw,1.45rem);letter-spacing:.05em;gap:9px}
+.hdr .brand .star{width:24px;height:24px}
+.hdr .brand small{font-size:.56rem;letter-spacing:.24em}
+.hdr .brand small::before,.hdr .brand small::after{width:14px}
+.hdr.scrolled .wrap{min-height:56px;padding-block:6px}
+.hdr.scrolled .brand{font-size:clamp(.98rem,3.9vw,1.24rem)}
+
+@media(min-width:721px){
+  :root{ --hdr-h: 104px; }
+  .hdr .wrap{gap:10px}
+  .hdr .brand{font-size:1.7rem}
+  .hdr .brand .star{width:32px;height:32px}
+  .hdr .brand small{font-size:.66rem}
+  .hdr.scrolled .wrap{min-height:62px}
+}
+@media(max-width:720px){
+  :root{ --hdr-h: 74px; }
+  .nav{inset:var(--hdr-h) 0 auto;background:var(--azul-2)}
+  .nav a{border-bottom-color:rgba(255,255,255,.1)}
+  .hdr .wrap{padding-inline:50px}
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   2) ORDEN DEL ENCABEZADO EN MÓVIL: nombre → foto → «Ver paquetes».
+   `display:contents` disuelve la rejilla de dos columnas para que la
+   foto y el texto se puedan ordenar como hermanos del rótulo.
+   ═══════════════════════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .hero-con-foto .wrap{display:flex;flex-direction:column}
+  .hero-con-foto .hero-split{display:contents}
+  .hero-con-foto .wordmark{order:1}
+  .hero-con-foto .hero-foto{order:2;margin-block:0 22px}
+  .hero-con-foto .hero-top{order:3}
+  .hero-con-foto .hero-split > div{order:4}
+  /* la portada usa otra rejilla, con el mismo orden */
+  .hero-grid .wordmark{order:0}
+  .hero-grid .hero-foto{order:1;margin:0 0 20px}
+  .hero-grid .hero-top{order:2;margin-bottom:14px}
+  .hero-grid h1{order:3}
+  .hero-grid .lead{order:4}
+  .hero-grid .hero-cta{order:5;margin-top:20px}
+  .hero-grid .hero-trust{order:6}
+}
