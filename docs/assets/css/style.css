@@ -36,7 +36,9 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+/* 4-sep-2026: el dueño pidió que el salto a los paquetes fuera inmediato. El
+   desplazamiento suave animaba el recorrido y se sentía lento. Instantáneo. */
+html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
@@ -743,10 +745,10 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
 
 /* 1 · Navegación entre páginas con fundido, como una aplicación. */
 @view-transition { navigation: auto; }
-::view-transition-old(root){animation:vtOut .18s ease-out both}
-::view-transition-new(root){animation:vtIn .26s ease-out both}
+::view-transition-old(root){animation:vtOut .07s linear both}
+::view-transition-new(root){animation:vtIn .1s linear both}
 @keyframes vtOut{to{opacity:0}}
-@keyframes vtIn{from{opacity:0;transform:translateY(8px)}}
+@keyframes vtIn{from{opacity:0}}
 
 /* 2 · La aparición al bajar la hace el compositor, no el JavaScript.
    Donde el navegador soporte `animation-timeline`, se apaga el observador de JS

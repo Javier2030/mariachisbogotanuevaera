@@ -18,7 +18,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/assets/css/style.css?v=ad300877">
+<link rel="stylesheet" href="/assets/css/style.css?v=f8afc94b">
+<!-- Navegación instantánea: el navegador PRE-RENDERIZA la página al apuntar el enlace, así
+     que al soltar el dedo ya está lista. Con «moderate» solo ocurre al apuntar o tocar. -->
+<script type="speculationrules">
+{"prerender":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}
+</script>
+
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">
 {
@@ -102,7 +108,7 @@
     <nav class="nav" id="nav">
       <a href="/mariachis-bogota/">Mariachis Bogotá</a>
       <a href="/serenatas-bogota/">Serenatas</a>
-      <a href="/precios/">Precios</a>
+      <a href="/precios/#paquetes">Precios</a>
       <a href="/#galeria">Fotos</a>
       <a class="btn btn-gold btn-sm" href="tel:+573214014431" data-cta="header-call">321 401 4431</a>
     </nav>
@@ -152,12 +158,12 @@
 <section class="section" id="paquetes-zona" style="padding-top:38px">
   <div class="wrap">
     <div class="prose">
-      <h2 id="paquetes">Los 5 paquetes</h2>
+      <h2>Los 5 paquetes</h2>
       <p>Los cinco salen con el mismo grupo: cinco músicos, voz femenina y voz masculina, sonido profesional y el homenaje de rodillas. La diferencia entre uno y otro está en cuántas canciones se cantan y en qué se entrega en la puerta. Elija por lo que quiere que pase esa noche, no por el número.</p>
       <p><b>El Básico de $180.000 es una promoción de lunes a viernes.</b> Sábados, domingos y festivos el paquete de entrada es el Sencillo, de $200.000, con exactamente lo mismo.</p>
     </div>
 
-    <div class="paqs">
+    <div class="paqs" id="paquetes">
       <article class="paq paq-promo">
         <div class="paq-marco">
           <span class="paq-cinta">Lunes a viernes</span>
@@ -377,7 +383,7 @@
         <ul>
           <li><a href="/serenatas-bogota/">Serenatas</a></li>
           <li><a href="/mariachis-bogota/">Mariachis Bogotá</a></li>
-          <li><a href="/precios/">Precios</a></li>
+          <li><a href="/precios/#paquetes">Precios</a></li>
         </ul>
       </div>
       <div>
