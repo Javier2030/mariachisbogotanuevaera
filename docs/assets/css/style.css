@@ -732,3 +732,53 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
   .svc{grid-template-columns:1fr !important}
   .svc .card p{font-size:.88rem}
 }
+
+/* ═══ PAQUETES: los artes del grupo son el ÚNICO formato (4-sep-2026) ═══
+   Antes convivían una tabla y unas tarjetas para lo mismo. El dueño entregó sus
+   piezas de diseño y son las que mandan. Rompen el ancho del .wrap para verse grandes. */
+.artes-paq{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:40px;
+  width:min(1520px,95vw);margin-left:50%;transform:translateX(-50%)}
+.arte-paq{position:relative;margin:0;border-radius:18px;overflow:hidden;background:#08160f;
+  border:1px solid rgba(201,150,43,.34);box-shadow:0 22px 52px -26px rgba(8,22,15,.62);
+  display:flex;flex-direction:column;
+  transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),border-color .3s}
+.arte-paq:hover{transform:translateY(-6px);box-shadow:0 32px 70px -28px rgba(8,22,15,.75);border-color:var(--oro)}
+.arte-paq.promo{border-color:var(--oro);box-shadow:0 22px 52px -22px rgba(201,150,43,.5)}
+.arte-paq .gal-btn{display:block;width:100%;padding:0;border:0;background:#08160f;cursor:zoom-in;
+  aspect-ratio:auto;border-radius:0;box-shadow:none;transform:none}
+.arte-paq .gal-btn:hover{transform:none;box-shadow:none;border-color:transparent}
+.arte-paq .gal-btn img{display:block;width:100%;height:auto;object-fit:contain;background:#08160f;transform:none}
+.arte-paq .gal-btn:hover img{transform:none}
+.arte-paq .gal-btn:focus-visible{outline:2px solid var(--oro);outline-offset:-3px}
+.arte-tag{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:2;
+  background:linear-gradient(135deg,var(--oro),#a97c1c);color:#fff;font-size:.72rem;font-weight:800;
+  letter-spacing:.09em;text-transform:uppercase;padding:5px 13px;border-radius:999px;
+  box-shadow:0 6px 18px -6px rgba(0,0,0,.7)}
+.arte-paq figcaption{padding:14px 13px 16px;color:#efe9d6;font-size:.94rem;font-weight:600;
+  text-align:center;background:linear-gradient(180deg,#0d2418,#08160f);
+  border-top:1px solid rgba(201,150,43,.28);margin-top:auto;display:flex;flex-direction:column;gap:11px}
+.arte-paq figcaption b{color:#fbf8ee;font-size:1.05rem}
+.arte-precio{color:var(--oro);font-weight:800}
+.arte-nota{display:block;font-size:.8rem;color:#c9c4b2;font-weight:500}
+.arte-paq .btn{width:100%;justify-content:center}
+@media(max-width:1240px){.artes-paq{grid-template-columns:repeat(3,1fr);width:min(1000px,93vw)}}
+@media(max-width:760px){.artes-paq{grid-template-columns:repeat(2,1fr);gap:14px;width:96vw}
+  .arte-paq figcaption{font-size:.85rem;padding:11px 9px 13px;gap:9px}
+  .arte-paq figcaption b{font-size:.95rem}}
+@media(max-width:430px){.artes-paq{grid-template-columns:1fr;width:92vw}}
+
+/* el ancla de paquetes no queda debajo del encabezado fijo */
+#paquetes{scroll-margin-top:86px}
+
+/* En móvil la FOTO del grupo va primero: se ve el mariachi sin tener que bajar. */
+@media(max-width:900px){
+  .hero-grid > div:first-child{display:flex;flex-direction:column}
+  .hero-grid .hero-top{order:1}
+  .hero-grid .hero-foto{order:2;margin-top:14px;margin-bottom:16px}
+  .hero-grid h1{order:3}
+  .hero-grid .lead{order:4}
+  .hero-grid .hero-cta{order:5;margin-top:20px}
+  .hero-grid .hero-trust{order:6;margin-top:16px}
+  .hero h1{font-size:clamp(1.9rem,7.4vw,2.5rem)}
+  .hero-foto img{max-height:none}
+}
