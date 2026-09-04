@@ -736,8 +736,7 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
 /* ═══ PAQUETES: los artes del grupo son el ÚNICO formato (4-sep-2026) ═══
    Antes convivían una tabla y unas tarjetas para lo mismo. El dueño entregó sus
    piezas de diseño y son las que mandan. Rompen el ancho del .wrap para verse grandes. */
-.artes-paq{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:40px;
-  width:min(1520px,95vw);margin-left:50%;transform:translateX(-50%)}
+.artes-paq{display:grid;gap:22px;margin-top:40px}
 .arte-paq{position:relative;margin:0;border-radius:18px;overflow:hidden;background:#08160f;
   border:1px solid rgba(201,150,43,.34);box-shadow:0 22px 52px -26px rgba(8,22,15,.62);
   display:flex;flex-direction:column;
@@ -765,14 +764,11 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
 .arte-precio{color:var(--oro);font-weight:800}
 .arte-nota{display:block;font-size:.8rem;color:#c9c4b2;font-weight:500}
 .arte-paq .btn{width:100%;justify-content:center}
-@media(max-width:1240px){.artes-paq{grid-template-columns:repeat(3,1fr);width:min(1000px,93vw)}}
 /* En móvil se abandona el truco de ancho completo (margin-left:50% + translate): dentro de
    contenedores con animación se desplazaba y sacaba barra horizontal. Aquí basta el ancho normal. */
-@media(max-width:760px){.artes-paq{grid-template-columns:repeat(2,1fr);gap:14px;
-    width:auto;margin-left:0;transform:none}
+@media(max-width:760px){
   .arte-paq figcaption{font-size:.85rem;padding:11px 9px 13px;gap:9px}
   .arte-paq figcaption b{font-size:.95rem}}
-@media(max-width:430px){.artes-paq{grid-template-columns:1fr}}
 
 /* el ancla de paquetes no queda debajo del encabezado fijo */
 #paquetes{scroll-margin-top:86px}
@@ -857,8 +853,6 @@ p { text-wrap: pretty; }
    La letra de los artes vive dentro de la imagen y no se puede agrandar: en una tarjeta de
    290 px es ilegible. La solución honesta es doble: piezas más grandes (3 columnas en vez
    de 5) y el contenido del paquete escrito DEBAJO en texto de verdad, a tamaño de lectura. */
-.artes-paq{grid-template-columns:repeat(3,1fr);gap:26px;width:min(1180px,94vw)}
-@media(min-width:1500px){.artes-paq{grid-template-columns:repeat(3,1fr);width:min(1320px,92vw)}}
 .arte-paq figcaption{padding:20px 20px 22px;font-size:1.02rem;gap:10px;align-items:center}
 .arte-nombre{font-family:var(--ff-head);font-size:1.72rem;line-height:1.1;color:#fbf8ee}
 .arte-precio{font-size:1.9rem;font-weight:800;color:var(--oro);letter-spacing:-.01em;line-height:1}
@@ -869,8 +863,7 @@ p { text-wrap: pretty; }
 .arte-lista li::before{content:"";position:absolute;left:4px;top:.58em;width:9px;height:9px;
   border-radius:50%;background:linear-gradient(140deg,var(--oro),#a97c1c);box-shadow:0 0 0 3px rgba(201,150,43,.16)}
 .arte-paq .btn{margin-top:6px;font-size:1.02rem;padding:13px 20px}
-@media(max-width:1100px){.artes-paq{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:720px){.artes-paq{grid-template-columns:1fr;width:min(520px,94vw);gap:22px}
+@media(max-width:720px){
   .arte-paq figcaption{font-size:1.02rem;padding:18px 18px 20px}
   .arte-paq figcaption b.arte-nombre{font-size:1.6rem}
   .arte-precio{font-size:1.8rem}
@@ -1066,7 +1059,10 @@ p { text-wrap: pretty; }
 /* ═══ PAQUETES EN FILA: el arte a un lado y el detalle al otro — 4-sep-2026 ═══
    Prueba pedida por el dueño. Cada paquete ocupa una fila completa: la pieza a la
    izquierda y lo que incluye a la derecha, para poder leer las dos cosas de un vistazo. */
-.artes-paq{grid-template-columns:1fr;width:min(1080px,94vw);gap:20px}
+/* ANCHO — fuente única. En móvil `width:auto` para que respete el relleno del contenedor:
+   con `94vw`/`96vw` la tarjeta salía 28 px más ancha que su caja, quedaba descentrada y el
+   borde derecho lo recortaba `overflow-x:hidden`. */
+.artes-paq{grid-template-columns:1fr;width:auto;gap:20px;margin-inline:auto;max-width:1080px}
 .arte-paq{flex-direction:row;align-items:stretch}
 /* El arte se alinea ARRIBA: centrado dejaba una franja negra vacía encima cuando el
    texto es más alto que la pieza. */
@@ -1088,9 +1084,8 @@ p { text-wrap: pretty; }
   .arte-lista li{font-size:1.02rem}
   .arte-paq .btn{max-width:340px;margin-inline:auto}
 }
-@media(min-width:1280px){ .artes-paq{width:min(1180px,92vw)} }
+@media(min-width:1280px){ .artes-paq{max-width:1180px} }
 @media(max-width:430px){
-  .artes-paq{grid-template-columns:1fr;width:96vw}
   .arte-paq .gal-btn{flex:0 0 44%;max-width:44%}
   .arte-paq figcaption{padding:14px 11px}
   .arte-paq figcaption b.arte-nombre{font-size:1.24rem}
