@@ -38,7 +38,10 @@
 
 /* 4-sep-2026: el dueño pidió que el salto a los paquetes fuera inmediato. El
    desplazamiento suave animaba el recorrido y se sentía lento. Instantáneo. */
-html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: auto; -webkit-text-size-adjust: 100%;
+  /* 4-sep-2026: el primer pintado era blanco y luego pasaba a beis. Con el fondo puesto
+     en <html> el navegador ya pinta beis desde el primer fotograma. */
+  background: #f2ebdd; color-scheme: light; }
 
 body {
   margin: 0;
