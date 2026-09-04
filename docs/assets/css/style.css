@@ -1100,3 +1100,8 @@ p { text-wrap: pretty; }
   background:center/contain no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 22' fill='none' stroke='%23c9962b' stroke-width='1.5'%3E%3Cpath d='M4 11h78' opacity='.75'/%3E%3Cpath d='M158 11h78' opacity='.75'/%3E%3Cpath d='M96 11c8-9 16-9 24 0-8 9-16 9-24 0z'/%3E%3Cpath d='M144 11c-8-9-16-9-24 0 8 9 16 9 24 0z'/%3E%3Ccircle cx='120' cy='11' r='2.6' fill='%23c9962b' stroke='none'/%3E%3C/svg%3E")}
 .gal-btn{border-color:rgba(201,150,43,.4)}
 .faq details{border-color:rgba(201,150,43,.28)}
+
+/* El nombre del grupo, en versales. (Se perdió al limpiar las reglas de los artes:
+   vivía al final de aquel bloque.) */
+.brand{text-transform:uppercase}
+.ftr .brand{font-size:1.5rem}
