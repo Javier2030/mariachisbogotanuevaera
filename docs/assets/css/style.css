@@ -907,3 +907,64 @@ p { text-wrap: pretty; }
   .wordmark .wm-2{animation-delay:.09s}
   @keyframes wmEntra{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ENCABEZADO CENTRADO — 4-sep-2026, pedido del dueño: «esa parte es
+   donde quiero las letras y el título moderno, y quiero centrado todo».
+   Composición editorial: estrella y nombre al centro, la ciudad debajo
+   entre filetes de oro, y el menú en su propia fila, también centrado.
+   Al bajar, el encabezado se encoge para no robar pantalla.
+   ═══════════════════════════════════════════════════════════════════ */
+:root{ --hdr-h: 96px; }
+
+.hdr .wrap{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;min-height:var(--hdr-h);position:relative;padding-block:12px;
+  transition:min-height .28s var(--ease-out),padding-block .28s var(--ease-out);
+}
+.brand{
+  flex-direction:row;align-items:center;justify-content:center;gap:14px;text-align:center;
+  font-size:clamp(1.42rem,5.6vw,2.15rem);letter-spacing:.075em;line-height:1;
+}
+.brand > span{display:flex;flex-direction:column;align-items:center;gap:7px}
+.brand .star{width:clamp(30px,7vw,42px);height:clamp(30px,7vw,42px);flex:0 0 auto;
+  filter:drop-shadow(0 3px 10px rgba(201,150,43,.45));
+  transition:transform .5s var(--ease-out)}
+.brand:hover .star{transform:rotate(-12deg) scale(1.06)}
+
+/* La ciudad, entre dos filetes de oro que se estiran con el texto. */
+.brand small{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:clamp(.6rem,2.1vw,.72rem);letter-spacing:.3em;text-indent:.3em;
+  color:var(--oro);font-weight:700;margin:0;
+}
+.brand small::before,.brand small::after{
+  content:"";display:block;width:clamp(18px,7vw,46px);height:1px;
+  background:linear-gradient(90deg,transparent,var(--oro));
+}
+.brand small::after{background:linear-gradient(90deg,var(--oro),transparent)}
+
+/* El menú, en su propia fila y centrado. */
+.nav{margin-left:0;justify-content:center;flex-wrap:wrap;gap:clamp(16px,2.4vw,30px)}
+.burger{position:absolute;right:0;top:50%;transform:translateY(-50%)}
+
+/* Al bajar la página el encabezado se compacta: menos alto, sin la ciudad. */
+.hdr.scrolled .wrap{min-height:64px;padding-block:8px}
+.hdr.scrolled .brand{font-size:clamp(1.16rem,4.4vw,1.5rem)}
+.hdr.scrolled .brand small{display:none}
+.hdr.scrolled .brand .star{width:26px;height:26px}
+
+@media(min-width:721px){
+  :root{ --hdr-h: 132px; }
+  .hdr .wrap{gap:14px}
+  .hdr.scrolled .wrap{min-height:70px;gap:8px}
+  .hdr.scrolled .nav{gap:20px}
+}
+@media(max-width:720px){
+  :root{ --hdr-h: 92px; }
+  /* El menú desplegable cuelga del alto real del encabezado, no de un 68 px fijo. */
+  .nav{inset:var(--hdr-h) 0 auto}
+  .burger{margin-left:0}
+}
+/* El ancla de paquetes se ajusta al encabezado nuevo. */
+#paquetes{scroll-margin-top:calc(var(--hdr-h) + 12px)}
