@@ -1064,7 +1064,9 @@ p { text-wrap: pretty; }
    izquierda y lo que incluye a la derecha, para poder leer las dos cosas de un vistazo. */
 .artes-paq{grid-template-columns:1fr;width:min(1080px,94vw);gap:20px}
 .arte-paq{flex-direction:row;align-items:stretch}
-.arte-paq .gal-btn{flex:0 0 46%;max-width:46%;display:flex;align-items:center;background:#050505}
+/* El arte se alinea ARRIBA: centrado dejaba una franja negra vacía encima cuando el
+   texto es más alto que la pieza. */
+.arte-paq .gal-btn{flex:0 0 46%;max-width:46%;display:flex;align-items:flex-start;background:#050505}
 .arte-paq .gal-btn picture{display:block;width:100%}
 .arte-paq .gal-btn img{aspect-ratio:auto;height:auto;width:100%}
 .arte-paq figcaption{flex:1 1 auto;justify-content:center;text-align:center;padding:18px 16px}
