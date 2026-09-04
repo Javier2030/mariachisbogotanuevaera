@@ -24,7 +24,12 @@
   var animables = document.querySelectorAll('.reveal');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if ('IntersectionObserver' in window && !reduce) {
+  /* 4-sep-2026: donde el navegador sabe animar con el scroll (animation-timeline: view())
+     el efecto lo lleva el CSS y este observador sobra. Cada entrada del observador costaba
+     trabajo en el hilo principal justo mientras el dedo arrastra, que es cuando se nota. */
+  var scrollNativo = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()');
+
+  if ('IntersectionObserver' in window && !reduce && !scrollNativo) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
