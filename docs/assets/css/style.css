@@ -1095,3 +1095,22 @@ p { text-wrap: pretty; }
   .arte-lista li{font-size:.9rem;padding-left:18px}
   .arte-paq .btn{font-size:.92rem;padding:11px 14px}
 }
+
+/* ═══ EL HUECO NEGRO SE LLENA CON EL PROPIO ARTE — 4-sep-2026 ═══
+   Cuando el detalle es más alto que la pieza sobraba negro. En vez de estirar el arte
+   (lo deformaría) o recortarlo (a este ancho habría que cortarle el 60 %), se pone la
+   misma pieza de fondo, ampliada y desenfocada. El arte se ve completo y nítido encima,
+   y la columna queda llena con sus propios colores. */
+.arte-paq .gal-btn{position:relative;align-items:center;overflow:hidden}
+.arte-paq .gal-btn::before{
+  content:"";position:absolute;inset:-8%;z-index:0;
+  background-image:var(--arte);background-size:cover;background-position:center;
+  filter:blur(22px) saturate(1.15) brightness(.62);
+  transform:scale(1.15);
+}
+.arte-paq .gal-btn::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(5,5,5,.28),rgba(5,5,5,.5));
+}
+.arte-paq .gal-btn picture{position:relative;z-index:2;
+  box-shadow:0 18px 44px -18px rgba(0,0,0,.9)}
