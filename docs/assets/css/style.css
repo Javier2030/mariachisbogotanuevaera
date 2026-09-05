@@ -1302,3 +1302,23 @@ p { text-wrap: pretty; }
   .paq-marco { padding: 24px 15px 20px; margin: 8px; }
   .paq-lista li { font-size: 1.15rem; padding-left: 28px; }
 }
+
+/* ═══ TARJETA UN 10 % MÁS COMPACTA, CON LA MISMA LETRA — 5-sep-2026 ═══
+   El alto de la tarjeta lo manda el aire, no el tamaño del texto. Se aprieta todo lo que
+   no es letra: relleno del marco, separación entre puntos, altura de la filigrana, margen
+   de la lista y del botón. Ni un tamaño de fuente se toca. */
+.paq-marco { padding: 18px 18px 16px; margin: 7px; }
+.orn { height: 13px; margin: 5px auto 7px; }
+.paq-nombre { margin-top: .04em; line-height: 1.0; }
+.paq-precio { line-height: .96; }
+.paq-precio .cop { margin-top: 3px; }
+.paq-nota { margin-top: 6px; line-height: 1.3; }
+.paq-lista { margin: 11px 0 12px; gap: 5px; }
+.paq-lista li { line-height: 1.24; }
+.paq-lista li::before { top: .32em; }
+.btn-oro { padding: 11px 16px; }
+.paq-cinta { top: -11px; padding: 5px 14px; }
+@media (max-width: 720px) {
+  .paq-marco { padding: 17px 14px 15px; margin: 6px; }
+  .paqs { gap: 16px; }
+}
