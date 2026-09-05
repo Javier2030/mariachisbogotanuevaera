@@ -1115,3 +1115,46 @@ p { text-wrap: pretty; }
 #paquetes-zona a:not(.btn):not(.btn-oro){color:var(--oro-cl);text-decoration-color:rgba(246,220,154,.45)}
 #paquetes-zona a:not(.btn):not(.btn-oro):hover{color:#fff}
 #paquetes-zona .muted{color:#bdb7a4}
+
+/* ═══ LA LISTA DE LA ZONA NOCHE — 5-sep-2026 ═══
+   `.prose ul` heredaba `--paper-dim`, un verde muy oscuro pensado para fondo claro. Sobre
+   el negro quedaba casi invisible: se leía la parte en negrita y el resto no.
+   Además, al posarse encima el punto se aclara del todo y se adelanta un paso, como pidió
+   el dueño. En el celular no hay «posarse», así que el estado normal ya es legible y el
+   efecto se activa también al tocar (`:active`). */
+#paquetes-zona .prose ul,
+#paquetes-zona .prose ol { color: #d9d3c2; }
+#paquetes-zona .prose li {
+  color: #d9d3c2;
+  padding: 10px 14px 10px 12px;
+  margin-left: -12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: color .18s var(--ease-out), background .22s var(--ease-out),
+              transform .22s var(--ease-out), box-shadow .22s var(--ease-out),
+              border-color .22s var(--ease-out);
+}
+#paquetes-zona .prose li b,
+#paquetes-zona .prose li strong { color: var(--oro-cl); }
+
+@media (hover: hover) {
+  #paquetes-zona .prose li:hover {
+    color: #fff;
+    background: linear-gradient(120deg, rgba(201,150,43,.16), rgba(201,150,43,.05));
+    border-color: rgba(201,150,43,.42);
+    transform: translateX(6px) scale(1.012);
+    box-shadow: 0 16px 34px -18px rgba(0,0,0,.9);
+  }
+  #paquetes-zona .prose li:hover b,
+  #paquetes-zona .prose li:hover strong { color: #fff; }
+}
+#paquetes-zona .prose li:active {
+  color: #fff;
+  background: linear-gradient(120deg, rgba(201,150,43,.18), rgba(201,150,43,.06));
+  border-color: rgba(201,150,43,.5);
+  transform: translateX(4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  #paquetes-zona .prose li { transition: color .18s linear }
+  #paquetes-zona .prose li:hover { transform: none }
+}
