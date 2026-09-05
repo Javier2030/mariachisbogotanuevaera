@@ -973,7 +973,9 @@ p { text-wrap: pretty; }
   .hero-con-foto .hero-foto{order:2;margin-block:0 22px}
   .hero-con-foto .hero-top{order:3}
   .hero-con-foto .hero-split > div{order:4}
-  /* la portada usa otra rejilla, con el mismo orden */
+  /* La portada usa otra rejilla. Sin declarar el contenedor como flexible, `order` no hace
+     nada: por eso seguía saliendo en el orden del código (rótulo, botón, titular, foto). */
+  .hero-grid > div:first-child{display:flex;flex-direction:column}
   .hero-grid .wordmark{order:0}
   .hero-grid .hero-foto{order:1;margin:0 0 20px}
   .hero-grid .hero-top{order:2;margin-bottom:14px}
