@@ -1322,3 +1322,11 @@ p { text-wrap: pretty; }
   .paq-marco { padding: 17px 14px 15px; margin: 6px; }
   .paqs { gap: 16px; }
 }
+
+/* Ajuste fino: la compactación anterior se pasó (−15 % medido, se pedía −10 %).
+   Se devuelve parte del aire, siempre sin tocar el tamaño de la letra. */
+.paq-marco { padding: 22px 18px 19px; }
+.orn { height: 15px; margin: 6px auto 8px; }
+.paq-lista { margin: 14px 0 16px; gap: 7px; }
+.btn-oro { padding: 12px 16px; }
+@media (max-width: 720px) { .paq-marco { padding: 21px 15px 18px; } }
