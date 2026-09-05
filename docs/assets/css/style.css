@@ -1110,3 +1110,8 @@ p { text-wrap: pretty; }
    vivía al final de aquel bloque.) */
 .brand{text-transform:uppercase}
 .ftr .brand{font-size:1.5rem}
+
+/* Enlaces dentro de la zona noche: en verde oscuro sobre negro no se leían. */
+#paquetes-zona a:not(.btn):not(.btn-oro){color:var(--oro-cl);text-decoration-color:rgba(246,220,154,.45)}
+#paquetes-zona a:not(.btn):not(.btn-oro):hover{color:#fff}
+#paquetes-zona .muted{color:#bdb7a4}
