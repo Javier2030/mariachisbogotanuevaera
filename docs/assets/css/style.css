@@ -1224,3 +1224,60 @@ p { text-wrap: pretty; }
   .hero-con-foto { padding-top: 10px !important }
   .hero-con-foto .hero-foto { margin-block: 4px 18px }
 }
+
+/* ═══ LATIDO EN LOS BOTONES QUE INVITAN A PULSAR — 5-sep-2026 ═══
+   Pedido del dueño: que «Ver paquetes», «Disponibles 24/7», «WhatsApp» y «Llamar» palpiten.
+   El latido es lento (2,6 s) y crece apenas un 2 %: llama la atención sin marear ni tapar
+   nada. Van desfasados para que no pulsen los cuatro a la vez, que se vería nervioso.
+   Se detiene mientras el dedo está encima y con `prefers-reduced-motion`. */
+@keyframes latido {
+  0%, 62%, 100% { transform: scale(1); }
+  72%           { transform: scale(1.022); }
+  82%           { transform: scale(.998); }
+  90%           { transform: scale(1.012); }
+}
+@keyframes latidoAura {
+  0%, 58%, 100% { box-shadow: 0 0 0 0 rgba(201,150,43,0); }
+  72%           { box-shadow: 0 0 0 9px rgba(201,150,43,0); }
+  73%           { box-shadow: 0 0 0 0 rgba(201,150,43,.42); }
+}
+@keyframes latidoAuraVerde {
+  0%, 58%, 100% { box-shadow: 0 10px 26px -10px rgba(18,161,80,.45), 0 0 0 0 rgba(18,161,80,0); }
+  72%           { box-shadow: 0 10px 26px -10px rgba(18,161,80,.45), 0 0 0 11px rgba(18,161,80,0); }
+  73%           { box-shadow: 0 10px 26px -10px rgba(18,161,80,.45), 0 0 0 0 rgba(18,161,80,.5); }
+}
+
+.hero-top .btn-gold,
+.hero-top .eyebrow,
+.mobile-bar .btn-wa,
+.mobile-bar .btn-gold { animation: latido 2.6s ease-in-out infinite; will-change: transform; }
+
+.hero-top .btn-gold { animation-delay: 0s; }
+.hero-top .eyebrow  { animation-delay: .5s; }
+.mobile-bar .btn-wa { animation-delay: 1s; }
+.mobile-bar .btn-gold { animation-delay: 1.5s; }
+
+/* El aura va en un segundo plano para no pelear con la sombra propia del botón. */
+.hero-top .btn-gold::after,
+.hero-top .eyebrow::after,
+.mobile-bar .btn-gold::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  animation: latidoAura 2.6s ease-in-out infinite; animation-delay: inherit;
+}
+.mobile-bar .btn-wa::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  animation: latidoAuraVerde 2.6s ease-in-out infinite; animation-delay: 1s;
+}
+.hero-top .btn-gold, .hero-top .eyebrow, .mobile-bar .btn-wa, .mobile-bar .btn-gold { position: relative; }
+
+/* Mientras el dedo o el puntero está encima, el latido para: manda la interacción. */
+.hero-top .btn-gold:hover, .hero-top .eyebrow:hover,
+.mobile-bar .btn-wa:hover, .mobile-bar .btn-gold:hover,
+.hero-top .btn-gold:active, .hero-top .eyebrow:active,
+.mobile-bar .btn-wa:active, .mobile-bar .btn-gold:active { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-top .btn-gold, .hero-top .eyebrow, .mobile-bar .btn-wa, .mobile-bar .btn-gold,
+  .hero-top .btn-gold::after, .hero-top .eyebrow::after,
+  .mobile-bar .btn-wa::after, .mobile-bar .btn-gold::after { animation: none }
+}
