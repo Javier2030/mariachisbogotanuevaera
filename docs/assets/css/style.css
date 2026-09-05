@@ -1158,3 +1158,58 @@ p { text-wrap: pretty; }
   #paquetes-zona .prose li { transition: color .18s linear }
   #paquetes-zona .prose li:hover { transform: none }
 }
+
+/* ═══ GALERÍA: más grande, centrada y con vida — 5-sep-2026 ═══
+   Tres cosas que pidió el dueño. Las fotos crecen un 10 % robándole aire al margen del
+   contenedor. La última, cuando queda impar en dos columnas, se centra en vez de quedar
+   colgando a la izquierda. Y al posarse encima la foto se acerca, se enmarca en oro y
+   levanta, con una capa de brillo que la recorre. */
+.gal { gap: 12px; }
+@media (max-width: 720px) {
+  /* -16 px a cada lado del relleno del .wrap: cada celda pasa de 168 a 184 px, un 9,5 % más. */
+  .gal { width: calc(100% + 32px); margin-inline: -16px; gap: 11px; }
+}
+/* La última foto, si queda sola en la fila, se centra. */
+.gal .gal-item:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 6px); }
+@media (min-width: 721px) {
+  .gal .gal-item:last-child:nth-child(odd) { grid-column: auto; justify-self: auto; width: auto; }
+  .gal .gal-item:last-child:nth-child(3n+1) { grid-column: 2 / 3; }
+}
+@media (min-width: 981px) {
+  .gal .gal-item:last-child:nth-child(3n+1) { grid-column: auto; }
+  .gal .gal-item:last-child:nth-child(4n+1) { grid-column: 2 / 4; justify-self: center; width: calc(50% - 7px); }
+}
+
+.gal-btn { position: relative; background: #efe7d6; transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s; }
+.gal-btn::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.42) 50%, transparent 62%);
+  transform: translateX(-120%); transition: opacity .2s;
+}
+@media (hover: hover) {
+  .gal-btn:hover { transform: translateY(-6px) scale(1.02); border-color: var(--oro);
+    box-shadow: 0 22px 44px -20px rgba(10,58,36,.55), 0 0 0 1px rgba(201,150,43,.45); }
+  .gal-btn:hover img { transform: scale(1.09); }
+  .gal-btn:hover::after { opacity: 1; animation: brilloGal .75s var(--ease-out) forwards; }
+}
+@keyframes brilloGal { to { transform: translateX(120%) } }
+.gal-btn:active { transform: translateY(-2px) scale(1.01); border-color: var(--oro); }
+@media (prefers-reduced-motion: reduce) {
+  .gal-btn, .gal-btn img { transition: none }
+  .gal-btn:hover { transform: none }
+  .gal-btn:hover img { transform: none }
+  .gal-btn::after { display: none }
+}
+
+/* ═══ LA RUTA DEL PIE, con estilo ═══
+   Antes era una línea de texto suelta bajo la galería. Ahora va centrada, en versalitas,
+   entre un filete de oro, y el separador es un rombo en vez de un signo mayor que. */
+.crumbs {
+  padding: 26px 0 22px; text-align: center; font-size: .72rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--muted); font-weight: 600;
+  border-top: 1px solid rgba(201,150,43,.28);
+}
+.crumbs a { color: var(--gold-2); text-decoration: none; transition: color .2s }
+.crumbs a:hover { color: var(--oro); text-decoration: none }
+.crumbs span { color: var(--muted) }
+.crumbs .sep { color: var(--oro); font-size: .58rem; margin: 0 .5em; vertical-align: .12em }
