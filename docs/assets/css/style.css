@@ -464,7 +464,7 @@ a.eyebrow:hover { text-decoration: none; border-color: var(--gold); background: 
 .mobile-bar .btn { flex: 1; padding: 13px 10px; font-size: .9rem; }
 
 /* --- Migas --- */
-.crumbs { font-size: .82rem; color: var(--muted); padding-top: 20px; }
+.crumbs { font-size: .78rem; color: var(--muted); padding: 18px 0 6px; }
 .crumbs a { color: var(--muted); }
 .crumbs a:hover { color: var(--gold); }
 
