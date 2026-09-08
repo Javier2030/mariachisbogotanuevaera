@@ -10,18 +10,18 @@
   var nav = document.getElementById('nav');
   if (burger && nav) {
     burger.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
+      var open = nav.classList.toggle('ne-open');
       burger.setAttribute('aria-expanded', String(open));
     });
     nav.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') { nav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+      if (e.target.tagName === 'A') { nav.classList.remove('ne-open'); burger.setAttribute('aria-expanded', 'false'); }
     });
   }
 
   /* --- Animación de entrada ---
      El estado oculto lo pone el JS, no el CSS: si este script no corre, el contenido
      simplemente se ve sin animación en lugar de quedar invisible. */
-  var animables = document.querySelectorAll('.reveal');
+  var animables = document.querySelectorAll('.ne-reveal');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* 4-sep-2026: donde el navegador sabe animar con el scroll (animation-timeline: view())
@@ -33,8 +33,8 @@
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
-          en.target.classList.remove('pre');
-          en.target.classList.add('in');
+          en.target.classList.remove('ne-pre');
+          en.target.classList.add('ne-in');
           io.unobserve(en.target);
         }
       });
@@ -43,23 +43,23 @@
     animables.forEach(function (el) {
       // Lo que ya está en pantalla no se oculta: evita el parpadeo del primer bloque.
       var r = el.getBoundingClientRect();
-      if (r.top < innerHeight * 0.9) { el.classList.add('in'); return; }
-      el.classList.add('pre');
+      if (r.top < innerHeight * 0.9) { el.classList.add('ne-in'); return; }
+      el.classList.add('ne-pre');
       io.observe(el);
     });
 
     // Red de seguridad: pase lo que pase con el observer, a los 3 s todo es visible.
     // Una animación no vale el riesgo de que un cliente no vea los precios.
     setTimeout(function () {
-      animables.forEach(function (el) { el.classList.remove('pre'); el.classList.add('in'); });
+      animables.forEach(function (el) { el.classList.remove('ne-pre'); el.classList.add('ne-in'); });
     }, 3000);
   }
 
   /* --- La tarjeta que se tiene enfrente se adelanta ---
      En escritorio esto lo resuelve :hover. En el móvil no hay ratón, así que la
-     tarjeta que queda en la franja central de la pantalla se marca con .ahead y
+     tarjeta que queda en la franja central de la pantalla se marca con .ne-ahead y
      el CSS la eleva. Solo una a la vez: si se encienden todas, no destaca ninguna. */
-  var tarjetas = [].slice.call(document.querySelectorAll('.price-card'));
+  var tarjetas = [].slice.call(document.querySelectorAll('.ne-price-card'));
   if (tarjetas.length && 'IntersectionObserver' in window && !reduce) {
     // Se decide por ancho, no por `hover`: la emulación de móvil de algunos
     // navegadores informa `hover: hover` aunque no haya ratón. Por debajo de 900 px
@@ -67,7 +67,7 @@
     if (matchMedia('(max-width: 900px)').matches) {
       var focoIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          en.target.classList.toggle('ahead', en.isIntersecting);
+          en.target.classList.toggle('ne-ahead', en.isIntersecting);
         });
       }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
       tarjetas.forEach(function (c) { focoIO.observe(c); });
@@ -75,9 +75,9 @@
   }
 
   /* --- Sombra del encabezado al bajar --- */
-  var hdr = document.querySelector('.hdr');
+  var hdr = document.querySelector('.ne-hdr');
   if (hdr) {
-    var marcarScroll = function () { hdr.classList.toggle('scrolled', scrollY > 12); };
+    var marcarScroll = function () { hdr.classList.toggle('ne-scrolled', scrollY > 12); };
     marcarScroll();
     addEventListener('scroll', marcarScroll, { passive: true });
   }
@@ -117,13 +117,13 @@
       var ok = true;
 
       form.querySelectorAll('[required]').forEach(function (el) {
-        var field = el.closest('.field');
-        if (isValid(el)) { field.classList.remove('invalid'); }
-        else { field.classList.add('invalid'); ok = false; }
+        var field = el.closest('.ne-field');
+        if (isValid(el)) { field.classList.remove('ne-invalid'); }
+        else { field.classList.add('ne-invalid'); ok = false; }
       });
 
       if (!ok) {
-        var first = form.querySelector('.field.invalid input, .field.invalid select');
+        var first = form.querySelector('.ne-field.ne-invalid input, .ne-field.ne-invalid select');
         if (first) first.focus();
         return;
       }
@@ -153,14 +153,14 @@
 
       track('generate_lead', { method: 'formulario', zona: g('q-zone') });
 
-      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      window.ne-open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       form.reset();
       if (dateInput) dateInput.value = dateInput.min;
     });
   }
 
   /* --- Visor de la galería --- */
-  var botones = [].slice.call(document.querySelectorAll('.gal-btn'));
+  var botones = [].slice.call(document.querySelectorAll('.ne-gal-btn'));
   if (botones.length) {
     var visor = document.createElement('div');
     visor.className = 'viewer';
@@ -198,8 +198,8 @@
     }
     function precargar(i) {
       var b = botones[(i + botones.length) % botones.length];
-      if (!b || b.dataset.pre) return;
-      b.dataset.pre = '1';
+      if (!b || b.dataset.ne-pre) return;
+      b.dataset.ne-pre = '1';
       var im = new Image();
       im.src = fuente(b);
     }
@@ -218,12 +218,12 @@
         if (puesta) return;
         puesta = true;
         vImg.src = grande.src;
-        visor.classList.remove('cargando');
+        visor.classList.remove('ne-cargando');
       };
 
       grande.onload = pintar;
       grande.onerror = function () {           // si el WebP fallara, el JPG de siempre
-        visor.classList.remove('cargando');
+        visor.classList.remove('ne-cargando');
         vImg.src = b.getAttribute('data-full');
       };
       grande.src = destino;
@@ -232,7 +232,7 @@
         pintar();
       } else {
         var mini = miniatura(b);               // relleno inmediato, ya descargado
-        if (mini) { vImg.src = mini; visor.classList.add('cargando'); }
+        if (mini) { vImg.src = mini; visor.classList.add('ne-cargando'); }
       }
 
       precargar(idx + 1);
@@ -246,9 +246,9 @@
     function abrir(i) {
       previo = document.activeElement;
       mostrar(i);
-      visor.classList.add('open');
+      visor.classList.add('ne-open');
       document.body.style.overflow = 'hidden';
-      visor.querySelector('.viewer-close').focus();
+      visor.querySelector('.ne-viewer-close').focus();
       if (!enHistorial) {
         try { history.pushState({ memVisor: 1 }, ''); enHistorial = true; } catch (_) { /* sin historial, se cierra igual con la ✕ */ }
       }
@@ -257,7 +257,7 @@
     // `retroceder` es false cuando quien cierra ES el botón atrás: ahí el navegador
     // ya consumió la entrada y llamar a history.back() nos sacaría de la página.
     function cerrar(retroceder) {
-      visor.classList.remove('open');
+      visor.classList.remove('ne-open');
       document.body.style.overflow = '';
       if (previo) previo.focus();
       if (enHistorial && retroceder !== false) {
@@ -269,17 +269,17 @@
     }
 
     addEventListener('popstate', function () {
-      if (visor.classList.contains('open')) cerrar(false);
+      if (visor.classList.contains('ne-open')) cerrar(false);
     });
 
     botones.forEach(function (b, i) { b.addEventListener('click', function () { abrir(i); }); });
-    visor.querySelector('.viewer-close').addEventListener('click', function () { cerrar(); });
-    visor.querySelector('.prev').addEventListener('click', function () { mostrar(idx - 1); });
-    visor.querySelector('.next').addEventListener('click', function () { mostrar(idx + 1); });
+    visor.querySelector('.ne-viewer-close').addEventListener('click', function () { cerrar(); });
+    visor.querySelector('.ne-prev').addEventListener('click', function () { mostrar(idx - 1); });
+    visor.querySelector('.ne-next').addEventListener('click', function () { mostrar(idx + 1); });
     visor.addEventListener('click', function (e) { if (e.target === visor) cerrar(); });
 
     document.addEventListener('keydown', function (e) {
-      if (!visor.classList.contains('open')) return;
+      if (!visor.classList.contains('ne-open')) return;
       if (e.key === 'Escape') cerrar();
       else if (e.key === 'ArrowLeft') mostrar(idx - 1);
       else if (e.key === 'ArrowRight') mostrar(idx + 1);
