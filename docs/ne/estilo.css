@@ -1330,3 +1330,9 @@ p { text-wrap: pretty; }
 .ne-paq-lista { margin: 14px 0 16px; gap: 7px; }
 .ne-btn-oro { padding: 12px 16px; }
 @media (max-width: 720px) { .ne-paq-marco { padding: 21px 15px 18px; } }
+
+/* 9-sep-2026 — franja de localidades en el pie: da a las 21 páginas de zona el enlace
+   entrante que no tenían desde la portada (Search Console: «página de referencia, ninguna»). */
+.ne-ftr-zonas { border-top: 1px solid rgba(255,255,255,.12); padding-top: 22px; margin-bottom: 22px; }
+.ne-ftr-zonas p { line-height: 2; margin: 0; font-size: .86rem; }
+.ne-ftr-zonas a { white-space: nowrap; }
